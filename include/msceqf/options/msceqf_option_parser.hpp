@@ -92,18 +92,24 @@ namespace msceqf
         }
         if constexpr (Rows == 1)
         {
+          std::ostringstream oss;
+          oss << x;
           utils::Logger::info("Parameter: [" + param + "] found. Option set to:" +
-                              (std::ostringstream{} << x).str());
+                              oss.str());
         }
         else if (Cols == 1)
         {
+          std::ostringstream oss;
+          oss << x.transpose();
           utils::Logger::info("Parameter: [" + param + "] found. Option set to: " +
-                              (std::ostringstream{} << x.transpose()).str());
+                              oss.str());
         }
         else
         {
+          std::ostringstream oss;
+          oss << x;
           utils::Logger::info("Parameter: [" + param + "] found. Option set to: \n" +
-                              (std::ostringstream{} << x).str());
+                              oss.str());
         }
 
         return true;
@@ -130,8 +136,10 @@ namespace msceqf
         using vector = std::vector<fp>;
         vector vec = node_[param].as<vector>();
         q = Quaternion(vec).normalize();
+        std::ostringstream oss;
+        oss << q;
         utils::Logger::info("Parameter: [" + param + "] found. Option set to: \n" +
-                            (std::ostringstream{} << q).str());
+                            oss.str());
         return true;
       }
       utils::Logger::warn("Parameter: [" + param + "] not found");
@@ -152,8 +160,10 @@ namespace msceqf
       if (node_[param])
       {
         p = node_[param].as<T>();
+        std::ostringstream oss;
+        oss << p;
         utils::Logger::info("Parameter: [" + param + "] found. Option set to: " +
-                            (std::ostringstream{} << p).str());
+                            oss.str());
         return true;
       }
       utils::Logger::warn("Parameter: [" + param + "] not found");
@@ -167,8 +177,10 @@ namespace msceqf
       if (!read(p, param))
       {
         p = def;
+        std::ostringstream oss;
+        oss << p;
         utils::Logger::warn("Parameter: [" + param + "] set to default value: " +
-                            (std::ostringstream{} << p).str());
+                            oss.str());
       }
     }
 
