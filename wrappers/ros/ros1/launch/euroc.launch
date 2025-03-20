@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+    <!-- arguments config -->
+    <arg name="config_filepath" default="/home/snggu/MicroSwarm/msceqf_ws/src/MSCEqF/wrappers/ros/ros1/config/euroc.yaml" />
+
+    <!-- arguments topics -->
+    <arg name="imu_topic"       default="/imu0" />
+    <arg name="cam_topic"       default="/cam0/image_raw" />
+    <arg name="pose_topic"      default="/pose" />
+    <arg name="path_topic"      default="/path" />
+    <arg name="image_topic"     default="/tracks" />
+
+    <!-- autonomy node -->
+    <node name="msceqf_ros1" pkg="msceqf" type="msceqf_ros1" output="screen" clear_params="true" >
+
+        <!-- topics -->
+        <param name="config_filepath"   type="string"       value="$(arg config_filepath)" />
+        <param name="imu_topic"         type="string"       value="$(arg imu_topic)" />
+        <param name="cam_topic"         type="string"       value="$(arg cam_topic)" />
+        <param name="pose_topic"        type="string"       value="$(arg pose_topic)" />
+        <param name="path_topic"        type="string"       value="$(arg path_topic)" />
+        <param name="image_topic"       type="string"       value="$(arg image_topic)" />
+        
+    </node>
+    <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find msceqf)/wrappers/ros/ros1/config/rviz.rviz" />
+
+</launch>

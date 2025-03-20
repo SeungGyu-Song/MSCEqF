@@ -59,9 +59,11 @@ MSCEqFRos::MSCEqFRos(const ros::NodeHandle &nh,
 void MSCEqFRos::callback_image(const sensor_msgs::Image::ConstPtr &msg)
 {
   cv_bridge::CvImageConstPtr cv_ptr;
+
   try
   {
-    cv_ptr = cv_bridge::toCvShare(msg, sensor_msgs::image_encodings::MONO8);
+      cv_ptr = cv_bridge::toCvShare(msg, sensor_msgs::image_encodings::MONO8);
+    
   }
   catch (cv_bridge::Exception &e)
   {

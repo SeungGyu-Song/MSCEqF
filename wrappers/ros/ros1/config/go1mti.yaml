@@ -1,0 +1,74 @@
+# Initial standard deviations (attitude, velocity, position, bias, extrinsics, instrinsics)
+extended_pose_std: [1.0e-1, 1.0e-1, 1.0e-9, 1.0e-1, 1.0e-1, 1.0e-1, 1.0e-9, 1.0e-9, 1.0e-9]
+bias_std: [1.0e-1, 1.0e-1, 1.0e-1, 1.0e-1, 1.0e-1, 1.0e-1]
+extrinsics_std: [1.0e-2, 1.0e-2, 1.0e-2, 1.0e-2, 1.0e-2, 1.0e-2]
+intrinsics_std: [1.0, 1.0, 1.0, 1.0]
+
+# IMU noise statistics
+# accelerometer_noise_density: 0.2
+# accelerometer_random_walk:   0.02
+# gyroscope_noise_density: 0.002
+# gyroscope_random_walk:   0.0002
+
+accelerometer_noise_density: 1.3860267737474954e-03
+accelerometer_random_walk:   1.8138323678976462e-05
+gyroscope_noise_density: 5.6169965387912694e-05
+gyroscope_random_walk:   5.541475128198737e-07
+
+# Camera calibration
+distortion_coeffs: [0.0027642751958346333, -0.0024467334289100104, 0.0003482450812260882, 0.0006342579059299763]
+distortion_model: radtan
+resolution: [640, 480]
+intrinsics: [389.64768952418063, 389.93153228858904, 325.13487495171677, 241.6293272960276]
+T_imu_cam: 
+  - [0.02901957,  0.00710265,  0.99955361,  0.05148344]
+  - [-0.99957774,  0.00169436,  0.02900823,  0.01499813]
+  - [-0.00148757, -0.99997334,  0.00714882, -0.0261092]
+  - [0.0, 0.0, 0.0, 1.0]
+
+
+# Initializer
+static_initializer_imu_window: 0.5
+static_initializer_disparity_window: 0.5
+static_initializer_acc_threshold: 0.0
+static_initializer_disparity_threshold: 1.0
+
+# Propagator
+state_transition_order: -1
+imu_buffer_max_size: 1000
+
+# Updater
+refine_traingulation: true
+feature_min_depth: 0.1
+feature_max_depth: 20
+feature_refinement_max_iterations: 20
+feature_refinement_tollerance: 1e-10
+measurement_projection_method: unit_plane
+feature_representation: anchored_inverse_depth
+pixel_standerd_deviation: 1.0
+curvature_correction: true
+zero_velocity_update: enabled
+
+# State options
+enable_camera_intrinsic_calibration: false
+gravity: 9.81
+num_clones: 11
+
+# Tracker
+equalization_method: histogram
+optical_flow_pyramid_levels: 3
+detector_pyramid_levels: 1
+feature_detector: fast
+grid_x_size: 4
+grid_y_size: 4
+min_feature_pixel_distance: 15
+min_features: 120
+max_features: 160
+fast_threshold: 20
+shi_tomasi_quality_level: 0.75
+
+# Track Manager
+max_track_length: 400
+
+# Logger level [0: Full, 1: INFO, 2: WARN, 3: ERR, 4: INACTIVE]
+logger_level: 1

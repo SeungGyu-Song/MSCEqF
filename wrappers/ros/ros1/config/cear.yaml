@@ -1,0 +1,69 @@
+# Initial standard deviations (attitude, velocity, position, bias, extrinsics, instrinsics)
+extended_pose_std: [1.0e-1, 1.0e-1, 1.0e-9, 1.0e-1, 1.0e-1, 1.0e-1, 1.0e-9, 1.0e-9, 1.0e-9]
+bias_std: [1.0e-1, 1.0e-1, 1.0e-1, 1.0e-1, 1.0e-1, 1.0e-1]
+extrinsics_std: [1.0e-2, 1.0e-2, 1.0e-2, 1.0e-2, 1.0e-2, 1.0e-2]
+intrinsics_std: [1.0, 1.0, 1.0, 1.0]
+
+# IMU noise statistics
+accelerometer_noise_density: 1.3860267737474954e-03
+accelerometer_random_walk:   1.8138323678976462e-05
+gyroscope_noise_density: 5.6169965387912694e-05
+gyroscope_random_walk:   5.541475128198737e-07
+
+# Camera calibration
+distortion_coeffs: [-0.058237917721271515,0.0692759975790977,0.000362122984370217,-0.000120137752674054]
+distortion_model: radtan
+resolution: [640, 480]
+intrinsics: [381.0546264648438,380.6285705566406,316.6095581054688,248.536376953125]
+T_imu_cam: 
+  - [-0.00357269,  0.00242922,  0.99999067,  0.00223393]
+  - [0.99997811, -0.00556138,  0.00358615,  0.01673834]
+  - [0.00557004,  0.99998158, -0.0024093,  -0.01309606]
+  - [0.0, 0.0, 0.0, 1.0]
+
+
+# Initializer
+static_initializer_imu_window: 1.0
+static_initializer_disparity_window: 0.5
+static_initializer_acc_threshold: 0.0
+static_initializer_disparity_threshold: 1.0
+
+# Propagator
+state_transition_order: -1
+imu_buffer_max_size: 1000
+
+# Updater
+refine_traingulation: true
+feature_min_depth: 0.1
+feature_max_depth: 20
+feature_refinement_max_iterations: 20
+feature_refinement_tollerance: 1e-10
+measurement_projection_method: unit_plane
+feature_representation: anchored_inverse_depth
+pixel_standerd_deviation: 1.0
+curvature_correction: true
+zero_velocity_update: enabled
+
+# State options
+enable_camera_intrinsic_calibration: false
+gravity: 9.81
+num_clones: 11
+
+# Tracker
+equalization_method: histogram
+optical_flow_pyramid_levels: 3
+detector_pyramid_levels: 1
+feature_detector: fast
+grid_x_size: 4
+grid_y_size: 4
+min_feature_pixel_distance: 15
+min_features: 120
+max_features: 160
+fast_threshold: 20
+shi_tomasi_quality_level: 0.75
+
+# Track Manager
+max_track_length: 400
+
+# Logger level [0: Full, 1: INFO, 2: WARN, 3: ERR, 4: INACTIVE]
+logger_level: 1
